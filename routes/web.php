@@ -31,12 +31,24 @@ Auth::routes();
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 
+//cartitemcount
+Route::get('/load-cart-data', [App\Http\Controllers\Frontend\CartController::class, 'cartcount']);
+
+//wishlistitemcount
+Route::get('/load-wishlist-data', [App\Http\Controllers\Frontend\WishlistController::class, 'wishlistcount']);
+
+
+
 //cart
 Route::post('add-to-cart', [App\Http\Controllers\Frontend\CartController::class, 'addproduct']);
 
 Route::post('update-cart', [App\Http\Controllers\Frontend\CartController::class, 'updatecart']);
 
 Route::post('delete-cart-item', [App\Http\Controllers\Frontend\CartController::class, 'deleteproduct']);
+
+Route::post('add-to-wishlist', [App\Http\Controllers\Frontend\WishlistController::class, 'add']);
+
+Route::post('remove-wishlist-item', [App\Http\Controllers\Frontend\WishlistController::class, 'destroy']);
 
 Route::middleware(['auth'])->group(function () {
     Route::get('cart', [App\Http\Controllers\Frontend\CartController::class, 'viewcart']);
@@ -50,6 +62,12 @@ Route::middleware(['auth'])->group(function () {
     //my orders
 
     Route::get('my-orders', [App\Http\Controllers\Frontend\UserController::class, 'index']);
+
+    Route::get('view-order/{id}', [App\Http\Controllers\Frontend\UserController::class, 'view']);
+
+    //wishlist
+    Route::get('wishlist', [App\Http\Controllers\Frontend\WishlistController::class, 'index']);
+
 
 });
 
@@ -89,8 +107,26 @@ Route::middleware(['auth', 'isAdmin'])->group(function () {
     Route::get('delete.product/{id}', [App\Http\Controllers\Admin\ProductController::class, 'delete']);
 
 
+    //orderAdmin
+    Route::get('orders', [App\Http\Controllers\Admin\OrderController::class, 'index']);
+
+    Route::get('admin/view-order/{id}', [App\Http\Controllers\Admin\OrderController::class, 'view']);
+
+    Route::put('update-order/{id}', [App\Http\Controllers\Admin\OrderController::class, 'update']);
+
+    Route::get('order-history', [App\Http\Controllers\Admin\OrderController::class, 'orderhistory']);
+
+
+    //usersAdmin
+    Route::get('users', [App\Http\Controllers\Admin\DashboardController::class, 'index']);
+    Route::get('view.user/{id}', [App\Http\Controllers\Admin\DashboardController::class, 'view']);
+
+
+
+
 });
 
 //total price in the oders table doesn't match
 // some product showing out of stock yet in stock
 // you cannot order more than three items
+//wishlist swal/alert error

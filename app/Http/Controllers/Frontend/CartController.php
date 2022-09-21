@@ -79,7 +79,8 @@ class CartController extends Controller
         {
             $prod_id = $request->input('prod_id');
 
-            if (Cart::where('prod_id', $prod_id)->where('user_id', Auth::id())->exists()) {
+            if (Cart::where('prod_id', $prod_id)->where('user_id', Auth::id())->exists())
+            {
                 $cartItem = Cart::where('prod_id', $prod_id)->where('user_id', Auth::id())->first();
 
                 $cartItem->delete();
@@ -91,6 +92,13 @@ class CartController extends Controller
         {
             return response()->json(['status' => "Login to continue"]);
         }
+    }
+
+    public function cartcount()
+    {
+        $cartcount = Cart::where('user_id', Auth::id())->count();
+
+        return response()->json(['count' => $cartcount]);
     }
 }
 

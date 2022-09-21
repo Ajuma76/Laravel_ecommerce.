@@ -15,4 +15,13 @@ class UserController extends Controller
 
         return view('frontend.orders.index', compact('oder'));
     }
+
+
+    public function view($id)
+    {
+        $orders = Oder::where('id', $id)->where('user_id', Auth::id())->first();
+
+        return view('frontend.orders.view', compact('orders'));
+    }
+
 }

@@ -35,8 +35,26 @@
             </li>
             <li class="nav-item {{ \Illuminate\Support\Facades\Request::is('add_products') ? 'active':'' }}">
                 <a class="nav-link" href="{{url('add_products')}}">
-                    <i class="material-icons">backup</i>
+                    <i class="material-icons">publish</i>
                     <p>Add Products</p>
+                </a>
+            </li>
+            <li class="nav-item {{ \Illuminate\Support\Facades\Request::is('orders') ? 'active':'' }}">
+                <a class="nav-link" href="{{url('orders')}}">
+                    <i class="material-icons">shop</i>
+                    <p>Orders</p>
+                </a>
+            </li>
+            <li class="nav-item {{ \Illuminate\Support\Facades\Request::is('order-history') ? 'active':'' }}">
+                <a class="nav-link" href="{{url('order-history')}}">
+                    <i class="material-icons">hive</i>
+                    <p>Order History</p>
+                </a>
+            </li>
+            <li class="nav-item {{ \Illuminate\Support\Facades\Request::is('users') ? 'active':'' }}">
+                <a class="nav-link" href="{{url('users')}}">
+                    <i class="material-icons">face</i>
+                    <p>Users</p>
                 </a>
             </li>
 

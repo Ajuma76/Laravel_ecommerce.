@@ -68,7 +68,7 @@ class CheckoutController extends Controller
         foreach ($cartItem as $item)
         {
             Order_Items::create([
-                'order_id' => $order->id,
+                'oder_id' => $order->id,
                 'prod_id' => $item->prod_id,
                 'qty' => $item->prod_qty,
                 'price' => $item->products->selling_price,

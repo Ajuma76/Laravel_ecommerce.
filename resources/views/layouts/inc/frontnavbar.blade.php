@@ -14,7 +14,12 @@
                 </li>
 
                 <li class="nav-item">
-                    <a class="nav-link" href="{{url('cart')}}">Cart</a>
+                    <a class="nav-link" href="{{url('cart')}}">Cart
+                     <span class="badge badge-pill bg-secondary cart-count">0</span></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{url('wishlist')}}">Wishlist
+                     <span class="badge badge-pill bg-success wishlist-count">0</span></a>
                 </li>
 
 
@@ -38,7 +43,7 @@
 
                         <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
                             <li>
-                                <a href="" class="dropdown-item">
+                                <a href=" {{url('my-orders')}}" class="dropdown-item">
                                     My Orders
                                 </a>
                             </li>

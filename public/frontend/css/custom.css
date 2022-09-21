@@ -18,3 +18,14 @@
     padding: 5px;
     font-weight: 400;
 }
+
+.order-details label{
+    font-size: 12px;
+    font-weight: 700;
+    padding-top: 5px;
+    padding-bottom: 0px;
+}
+
+.order-details div{
+    font-size: 14px;
+}

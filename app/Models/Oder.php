@@ -26,4 +26,9 @@ class Oder extends Model
         'tracking_no',
 
     ];
+
+    public function order_items()
+    {
+        return $this->hasMany(Order_Items::class);
+    }
 }
