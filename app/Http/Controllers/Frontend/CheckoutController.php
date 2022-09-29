@@ -31,7 +31,7 @@ class CheckoutController extends Controller
         return view('frontend.checkout.index', compact('old_cartItem', 'cartItem'));
     }
 
-    public function placeorder(Request $request)
+    public function placeorder(Request  $request)
     {
         $order = new Oder();
 
@@ -54,7 +54,7 @@ class CheckoutController extends Controller
         $cartItem_total = Cart::where('user_id', Auth::id())->get();
         foreach ($cartItem_total as $prod)
         {
-            $total += $prod->products->selling_price;
+            $total += $prod->products->selling_price * $prod->prod_qty;
         }
 
         $order->total_price = $total;
@@ -103,6 +103,40 @@ class CheckoutController extends Controller
 
     }
 
+    public function razorpaycheck(Request $request)
+    {
+        $cartItem = Cart::where('user_id', Auth::id())->get();
 
+        $total_price = 0;
+        foreach ($cartItem as $item)
+        {
+            $total_price += $item->products->selling_price * $item->prod_qty;
+        }
+
+        $fname = $request->input('fname');
+        $lname = $request->input('lname');
+        $email = $request->input('email');
+        $phone = $request->input('phone');
+        $address1 = $request->input('address1');
+        $address2 = $request->input('address2');
+        $city = $request->input('city');
+        $state = $request->input('state');
+        $country = $request->input('country');
+        $pincode = $request->input('pincode');
+
+        return response()->json([
+            'fname' => $fname,
+            'lname' => $lname,
+            'email' => $email,
+            'phone' => $phone,
+            'address1' => $address1,
+            'address2' => $address2,
+            'city' => $city,
+            'state' => $state,
+            'country' => $country,
+            'pincode' => $pincode,
+            'total_price' => $total_price
+        ]);
+  }
 
 }

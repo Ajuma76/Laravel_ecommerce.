@@ -30,7 +30,7 @@
         </div>
     @endif
     <div class="container my-5">
-        <div class="card shadow ">
+        <div class="card shadow wishlistItems">
             <div class="card-body">
                 @if($wishlist->count() > 0 )
                         @foreach($wishlist as $item)
@@ -65,7 +65,7 @@
                                     </button>
                                 </div>
                                 <div class="col-md-2 my-auto">
-                                    <button class="badge badge-danger remove-wishlist-item" onclick="return confirm('Remove Product?')">
+                                    <button class="badge badge-danger remove-wishlist-item" >
                                         <i class="fa fa-trash"></i> Remove
                                     </button>
                                 </div>
@@ -85,3 +85,4 @@
 
 
 
+{{--onclick="return confirm('Remove Product?')"--68}}--}}

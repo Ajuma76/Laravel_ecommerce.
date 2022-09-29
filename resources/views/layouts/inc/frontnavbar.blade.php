@@ -4,11 +4,22 @@
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
+
+        <div class="search-bar">
+            <form action="{{ url('searchproduct') }}" method="post">
+                @csrf
+                <div class="input-group" >
+                    <input type="search" class="form-control" placeholder="search product" required id="search_product" name="product_name">
+                    <button type="submit" class="input-group-text btn btn-secondary" ><i class="fa fa-search"></i></button>
+                </div>
+            </form>
+        </div>
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav ms-auto">
                 <li class="nav-item">
-                    <a class="nav-link" aria-current="page" href="{{url('/')}}">Home</a>
+                    <a class="nav-link float-start" aria-current="page" href="{{url('/')}}">Home</a>
                 </li>
+
                 <li class="nav-item">
                     <a class="nav-link" href="{{url('category')}}">Category</a>
                 </li>

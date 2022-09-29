@@ -98,7 +98,7 @@
 
         });
 
-        $('.increment-btn').click(function (e) {
+        $(document).on('click', '.increment-btn', function (e){
             e.preventDefault();
 
             var inc_value = $(this).closest('.product_data').find('.qty-input').val();
@@ -113,7 +113,8 @@
 
         });
 
-        $('.decrement-btn').click(function (e) {
+
+        $(document).on('click', '.decrement-btn', function (e){
             e.preventDefault();
 
             var dec_value = $(this).closest('.product_data').find('.qty-input').val();
@@ -128,7 +129,7 @@
 
         });
 
-        $('.delete-cart-item').click(function (e) {
+        $(document).on('click', '.delete-cart-item', function (e){
             e.preventDefault();
 
             var prod_id = $(this).closest('.product_data').find('.prod_id').val();
@@ -146,7 +147,9 @@
                     'prod_id' : prod_id,
                 },
                 success: function (response){
-                    window.location.reload()
+                    // window.location.reload()
+                    loadcart();
+                    $('.cartItems').load(location.href + " .cartItems");
                     swal("", response.status, "success");
                 }
 
@@ -155,58 +158,62 @@
 
         });
 
-        $('.remove-wishlist-item').click(function (e) {
-            e.preventDefault();
+        $(document).on('click', '.remove-wishlist-item', function (e){
+                e.preventDefault();
 
-            var prod_id = $(this).closest('.product_data').find('.prod_id').val();
+                var prod_id = $(this).closest('.product_data').find('.prod_id').val();
 
-            $.ajaxSetup({
-                headers: {
-                    'X-CSRF-TOKEN' : $('meta[name = "csrf-token"]').attr('content')
-                }
+                $.ajaxSetup({
+                    headers: {
+                        'X-CSRF-TOKEN' : $('meta[name = "csrf-token"]').attr('content')
+                    }
+                });
+
+                $.ajax({
+                    method: "POST",
+                    url: "remove-wishlist-item",
+                    data: {
+                        'prod_id' : prod_id,
+                    },
+                    success: function (response){
+                        // window.location.reload()
+                        loadwishlist();
+                        $('.wishlistItems').load(location.href + " .wishlistItems");
+                        swal("", response.status, "success");
+                    }
+
+                })
+
+
             });
 
-            $.ajax({
-                method: "POST",
-                url: "remove-wishlist-item",
-                data: {
+
+        $(document).on('click', '.changequantity', function (e){
+                e.preventDefault();
+
+                var prod_id = $(this).closest('.product_data').find('.prod_id').val();
+                var qty = $(this).closest('.product_data').find('.qty-input').val();
+                data = {
                     'prod_id' : prod_id,
-                },
-                success: function (response){
-                    window.location.reload()
-                    swal("", response.status, "success");
+                     'qty' : qty,
                 }
 
-            })
+                $.ajaxSetup({
+                    headers: {
+                        'X-CSRF-TOKEN' : $('meta[name = "csrf-token"]').attr('content')
+                    }
+                });
 
 
-        });
-
-        $('.changequantity').click(function (e) {
-            e.preventDefault();
-
-            var prod_id = $(this).closest('.product_data').find('.prod_id').val();
-            var qty = $(this).closest('.product_data').find('.qty-input').val();
-            data = {
-                'prod_id' : prod_id,
-                 'qty' : qty,
-            }
-
-            $.ajaxSetup({
-                headers: {
-                    'X-CSRF-TOKEN' : $('meta[name = "csrf-token"]').attr('content')
-                }
-            });
-
-
-            $.ajax({
-                method: "POST",
-                url : "update-cart",
-                data : data,
-                success: function (response) {
-                    window.location.reload();
-                }
-            })
+                $.ajax({
+                    method: "POST",
+                    url : "update-cart",
+                    data : data,
+                    success: function (response) {
+                        // window.location.reload();
+                        $('.cartItems').load(location.href + " .cartItems");
+                    }
+                })
         });
 
 

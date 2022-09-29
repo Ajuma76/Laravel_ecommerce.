@@ -30,7 +30,7 @@
         </div>
     @endif
     <div class="container my-5">
-        <div class="card shadow ">
+        <div class="card shadow cartItems">
 
             @if($cartItems->count() > 0)
 
@@ -65,7 +65,7 @@
                         @endif
                     </div>
                     <div class="col-md-2 my-auto">
-                        <button class="badge badge-danger delete-cart-item" onclick="return confirm('Remove Product?')">
+                        <button class="badge badge-danger delete-cart-item">
                             <i class="fa fa-trash"></i> Remove
                         </button>
                     </div>
@@ -91,7 +91,6 @@
 @endsection
 
 
-
-
+{{--onclick="return confirm('Remove Product?')68--}}
 
 

@@ -25,6 +25,13 @@ Route::get('category/{slug}', [App\Http\Controllers\Frontend\FrontendController:
 
 Route::get('category/{cate_slug}/{prod_slug}', [App\Http\Controllers\Frontend\FrontendController::class, 'productview']);
 
+//search
+Route::get('product_list', [App\Http\Controllers\Frontend\FrontendController::class, 'productlistAjax']);
+
+Route::post('searchproduct', [App\Http\Controllers\Frontend\FrontendController::class, 'searchproduct']);
+
+
+
 Auth::routes();
 
 //home
@@ -69,6 +76,22 @@ Route::middleware(['auth'])->group(function () {
     Route::get('wishlist', [App\Http\Controllers\Frontend\WishlistController::class, 'index']);
 
 
+    //razorpay
+    Route::post('proceed-to-pay', [App\Http\Controllers\Frontend\CheckoutController::class, 'razorpaycheck']);
+
+
+    //rating
+    Route::post('ratings', [App\Http\Controllers\Frontend\RatingsController::class, 'add']);
+
+    //review
+
+   Route::get('add_review/{product_slug}/user_review', [App\Http\Controllers\Frontend\ReviewController::class, 'review']);
+
+   Route::post('add_review', [App\Http\Controllers\Frontend\ReviewController::class, 'create']);
+
+   Route::get('edit_review/{product_slug}/user_review', [App\Http\Controllers\Frontend\ReviewController::class, 'edit']);
+
+   Route::put('update_review', [App\Http\Controllers\Frontend\ReviewController::class, 'update']);
 });
 
 
